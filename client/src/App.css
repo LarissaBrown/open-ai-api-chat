@@ -1,0 +1,123 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.App {
+  text-align: center;
+  display: flex;
+  color: white;
+  position: absolute;
+  top: 0; bottom: 0; right: 0; left: 0;
+}
+
+.sidemenu {
+  width: 240px;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid rgb(195, 190, 190);
+}
+.navbar {
+  display: flex;
+  background-color: white;
+  color: rgb(68, 67, 67);
+}
+.navbar h1 {
+  margin-top: 3em;
+  font-size: 1em;
+  line-height: .25;
+  text-align: left;
+}
+
+.navbar p {
+  font-size: 10px;
+}
+
+.menu {
+  height: 35px;
+  margin-top: 1em;
+}
+.menu-container {
+  margin: 20px;
+}
+
+.text-container p {
+  font-size: .5em;
+
+}
+.encrypted-note {
+  display: flex;
+  justify-content: center;
+}
+.encrypted-note p {
+  font-size: .5em;
+  color:rgb(145, 144, 144);
+  background-color:rgb(203, 200, 200);
+  border-radius: 5px;
+}
+.date-stamp {
+  color: black;
+  font-size: 10px;
+  flex-direction: column;
+}
+
+.chatbox {
+  flex: 1;
+  background-color:#ece9e9;
+  position: relative;
+}
+
+.chat-input-holder {
+padding: 24px;
+position: absolute;
+bottom: 0;
+left:0;
+right: 0;
+width: 90%;
+}
+
+.chat-input-textarea {
+  border-color: none;
+  border: none;
+  width: 90%;
+  border-radius: 5px;
+  padding: 12px;
+
+}
+.chatlog {
+ padding: 12px;
+ display:flex;
+ justify-content:left;
+ color:rgb(104, 102, 102);
+
+}
+.chat-message-center {
+  
+}
+.chat-message {
+padding: 12px;
+display: flex;
+padding-left: 40px;
+padding-right: 40px;
+}
+.message{
+  display: flex;
+  background-color: white;
+  padding: 10px;
+  border-radius: 0 10px 10px;
+
+}
+.chat-openai {
+  padding: 12px;
+  justify-content:right;
+  display:flex;
+ 
+}
+.message-openai{
+  display: flex;
+  background-color:  blue;
+  color:white;
+  padding: 10px;
+  border-radius: 10px 10px 0px;
+
+}
