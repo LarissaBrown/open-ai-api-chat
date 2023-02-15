@@ -1,7 +1,5 @@
 import dotenv from 'dotenv'
 import express from 'express'
-import pkg from 'body-parser';
-const { json } = pkg;
 
 import { Configuration, OpenAIApi } from 'openai'
 import cors from 'cors'
@@ -9,8 +7,9 @@ dotenv.config()
 const app = express();
 const port = 3080;
 
-app.use(cors());
-app.use(json());
+app.use(express.urlencoded({extended: true}));
+app.use(express.json())
+app.use(cors())
 
 app.post('/', async (req, res) => {
     const { message } = req.body;
@@ -26,7 +25,7 @@ app.post('/', async (req, res) => {
     });
 
     res.json({
-        data: response.data,
+        // data: response.data,
         message: response.data.choices[0].text,
     })
 

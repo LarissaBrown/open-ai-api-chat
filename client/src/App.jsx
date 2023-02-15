@@ -6,34 +6,29 @@ import Sidebar from './assets/components/Sidebar';
 import './App.css'
 
 function App() {
-console.log("App Rendering")
+// console.log("App Rendering")
 //state of variables
   const [input, setInput] = useState("");
-  const [chatLog, setChatLog] = useState([
-    {
-      user: "gpt",
-      message: "How can I help you today?"
-    },
-    {
-      user: "me",
-      message: "I want to use chatGPT today."
-    }
-  ])
+  const [chatLog, setChatLog] = useState([])
 
 const handleOnChange = (e)=> setInput(e.target.value)
 
-useEffect(()=>{
+// useEffect(()=>{
 
-}, [])
+// }, [])
 //set the chatLog message with the input value
+
+
  async function handleSubmit(e){
   e.preventDefault();
-  setChatLog([...chatLog, { user: "me", message:`${input}`}])
+  setChatLog([...chatLog, { user: "me", message: `${input}` }]);
+  console.log("input", input)
   setInput("");
-  
-
+ 
+console.log("chatLog", chatLog)
 //post the chatLog message from the input value
-  const response = await fetch("http://localhost:3080/", 
+  const response = await fetch("http://localhost:3080/",
+  
   {
     method:"POST",
     headers: {
@@ -42,13 +37,16 @@ useEffect(()=>{
     body: JSON.stringify({
       message: chatLog.map((message) => message.message).join("")
      })
+
       
   
     })
 //receive the response from the openai data and set it in the chatog state
     const data = await response.json();
+    console.log("data from response", data)//This is getting an empty message sometimes and other times a non-asked for response message
+    console.log("chatLog", chatLog)
     setChatLog([...chatLog, { user: "gpt", message: `${data.message}`}])
-   
+    console.log("chatLog", chatLog)//missing the user:me message
 
    
 }

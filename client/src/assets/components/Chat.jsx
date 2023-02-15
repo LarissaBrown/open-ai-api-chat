@@ -3,9 +3,6 @@ import React from 'react'
 
 export default function Chat(props) {
 
-    console.log("message",props.message)
-    console.log("user", props.user)
-
 return(
         <>
         {/* //TODO conditional for styling  at chat-message on left or right white or blue needs to be done */}
