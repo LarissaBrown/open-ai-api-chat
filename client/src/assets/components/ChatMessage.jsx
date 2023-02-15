@@ -1,17 +1,14 @@
 import React from 'react'
-import RightSideChat from './RightSideChat'
-import LeftSideChat from './LeftSideChat'
+import Chat from './Chat'
 
 
 export default function ChatMessage(props){
-const rightChat = <RightSideChat aimessage={props.aimessage}/>
-const leftChat = <LeftSideChat message={props.message}/>
+const chat = <Chat message={props.message} user={props.user}/>
 
     return (
     <div >
         {/* if props.message then render this left side messagebubble and vice verse*/}
-        {leftChat}
-        {rightChat}
+        {chat}
 
     </div>
     )

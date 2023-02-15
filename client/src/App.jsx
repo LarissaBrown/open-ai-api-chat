@@ -1,56 +1,71 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ChatMessage from './assets/components/ChatMessage';
 import Navbar from './assets/components/Navbar';
 import ChatInputForm from './assets/components/ChatInputForm';
+import Sidebar from './assets/components/Sidebar';
 import './App.css'
 
 function App() {
-
+console.log("App Rendering")
 //state of variables
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([
-    { message: "", aimessage: ""} 
+    {
+      user: "gpt",
+      message: "How can I help you today?"
+    },
+    {
+      user: "me",
+      message: "I want to use chatGPT today."
+    }
   ])
 
 const handleOnChange = (e)=> setInput(e.target.value)
 
+useEffect(()=>{
+
+}, [])
 //set the chatLog message with the input value
  async function handleSubmit(e){
   e.preventDefault();
-  setChatLog([...chatLog, {message: input}])
+  setChatLog([...chatLog, { user: "me", message:`${input}`}])
   setInput("");
   
+
 //post the chatLog message from the input value
   const response = await fetch("http://localhost:3080/", 
-
   {
     method:"POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: {
-      prompt: JSON.stringify(chatLog.message)
-    }
+    body: JSON.stringify({
+      message: chatLog.map((message) => message.message).join("")
+     })
       
   
     })
 //receive the response from the openai data and set it in the chatog state
     const data = await response.json();
-    console.log("data", data)
-    setChatLog([...chatLog, {message: `${data.data}`},{aimessage: `${data.message}`}])
+    setChatLog([...chatLog, { user: "gpt", message: `${data.message}`}])
+   
+
    
 }
+
 
 const handleDropdown = ()=> {
 
   
 }
 
-const chatMessage = chatLog.map((chatLog, index)=> (
+
+const chatMessage = chatLog.map((message, index)=> (
   <ChatMessage 
     key={index} 
-    message={chatLog.message} 
-    aimessage={chatLog.aimessage}/>
+    message={message.message} 
+    user={message.user}
+    />
   ))
   return (
     <div className="App">
@@ -64,24 +79,9 @@ const chatMessage = chatLog.map((chatLog, index)=> (
             onSubmit={handleSubmit} 
             onChange={handleOnChange}
             value={input} 
-            message={chatLog.message}
-            aimessage={chatLog.aimessage}/>
+            />
       </section>
-      <aside className="sidemenu">
-        <div className="recent-chats">Recent Chats</div>
-        <div className="title-container">Clause for renters best interest for a rental property
-          <button className="icon-right" onClick={handleDropdown} >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-          </svg>
-          </button>
-          <div className="dropdown">
-            <h4>Edit Title</h4>
-            <h4>Delete Title</h4>
-          </div> 
-        </div>
-    
-      </aside>
+          <Sidebar onClick={handleDropdown} />
     </div>
   )
 }
