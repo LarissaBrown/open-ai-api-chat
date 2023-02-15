@@ -1,37 +1,39 @@
-import { Configuration, OpenAIApi } from "openai";
+import dotenv from 'dotenv'
 import express from 'express'
-import bodyParser from 'body-parser'
+import pkg from 'body-parser';
+const { json } = pkg;
+
+import { Configuration, OpenAIApi } from 'openai'
 import cors from 'cors'
+dotenv.config()
+const app = new express();
 
-const configuration = new Configuration({
-    organization: "org-XVof9YY6mHN5rnZO0ANlz2bH",
-    apiKey: "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"
-});
+app.use(cors());
+app.use(json());
+
+app.get('/', (req, res) => {
+
+})
+const token = process.env.OPENAI_KEY;
+const configuration = new Configuration({apiKey: token});
 const openai = new OpenAIApi(configuration);
-// const response = await openai.listEngines();
 
-//create a simple express api that calls the function above
 
-const app = express()
-app.use(bodyParser.json())
-app.use(cors())
-const port = 3080
+app.post('/', (req, res) => {
+    const response = openai.createCompletion({
+        model: 'text-davinci-003',
+        prompt: req.body.prompt,
+        temperature: 0,
+        top_p: 1,
+        frequency_penalty:0,
+        presence_penalty: 0,
+        max_tokens: 1024
+    });
+    response.then((data) => {
+        res.send({message: data.data.choices[0].text})
+    })
+});
 
-app.post ("/", async(req, res)=>{
-    const {message } = req.body;
-    res.send('Hello World')
-    const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: `${message}`,
-        max_tokens: 100,
-        temperature: 0.5, });
-console.log()
-res.json({
-    message: response.data.choices[0].text,
-    data: message,
-})
-})
-
-app.listen(port, () => {
-    console.log ('Example app listening at http://localhost:${port}')
+app.listen(3080, () => {
+    console.log('server is running')
 })

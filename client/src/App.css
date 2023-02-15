@@ -1,4 +1,5 @@
 #root {
+  box-sizing:border-box;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -16,6 +17,36 @@
   padding: 10px;
   background-color: white;
   border: 1px solid rgb(195, 190, 190);
+}
+.recent-chats {
+  color: black;
+  font-size: 1em;
+  text-align: left;
+}
+.title-container {
+  position:relative;
+  padding: 5px;
+  display: flex;
+  flex-direction:column;
+  height: 80px;
+  width: 100%;
+  border: 1px solid rgb(201, 198, 198);
+  color:black;
+  text-align:left;
+
+}
+.dropdown
+.icon-right {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  padding-right: 5px;
+  border: none;
+  background-color:transparent;
+  
+}
+.icon-right:active {
+  border: transparent;
 }
 .navbar {
   display: flex;
@@ -79,30 +110,25 @@ width: 90%;
 .chat-input-textarea {
   border-color: none;
   border: none;
+  background-color: white;
   width: 90%;
+  color:black;
   border-radius: 5px;
   padding: 12px;
 
 }
-.chatlog {
- padding: 12px;
- display:flex;
- justify-content:left;
- color:rgb(104, 102, 102);
 
-}
-.chat-message-center {
-  
-}
 .chat-message {
 padding: 12px;
 display: flex;
+color:black;
 padding-left: 40px;
 padding-right: 40px;
 }
 .message{
   display: flex;
   background-color: white;
+  color:black;
   padding: 10px;
   border-radius: 0 10px 10px;
 
