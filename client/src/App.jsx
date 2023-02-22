@@ -9,13 +9,18 @@ function App() {
 // console.log("App Rendering")
 //state of variables
   const [input, setInput] = useState("");
-  const [chatLog, setChatLog] = useState([])
+  const [chatLog, setChatLog] = useState([]);
+
+  useEffect(() => {
+    if(input !== ""){
+
+    }
+  }, [input])
+  
 
 const handleOnChange = (e)=> setInput(e.target.value)
 
-// useEffect(()=>{
 
-// }, [])
 //set the chatLog message with the input value
 
 
