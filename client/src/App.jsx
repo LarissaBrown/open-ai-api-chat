@@ -11,11 +11,11 @@ function App() {
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
 
-  useEffect(() => {
-    if(input !== ""){
+  // useEffect(() => {
+  //   if(input !== ""){
 
-    }
-  }, [input])
+  //   }
+  // }, [input])
   
 
 const handleOnChange = (e)=> setInput(e.target.value)
